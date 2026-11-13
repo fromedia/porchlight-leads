@@ -61,72 +61,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Contact Form Handling
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Split name into first and last
-    const nameParts = (data.name || '').trim().split(' ');
-    const firstName = nameParts[0] || '';
-    const lastName = nameParts.slice(1).join(' ') || '';
-    
-    // Prepare data for Global Control
-    const leadData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: data.email,
-        phone: data.phone || '',
-        businessName: data.business || '',
-        websiteUrl: '',
-        businessType: data.industry || '',
-        helpNeeded: data.message || '',
-        serviceInterest: '',
-        bestContactMethod: '',
-        message: data.message || '',
-        sourcePage: window.location.href,
-        leadSource: 'Porch Light Leads Website'
-    };
-    
-    try {
-        // Send to API endpoint
-        const response = await fetch('/api/submit-lead', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(leadData)
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            console.log('Lead submitted successfully:', result);
-            
-            // Show success message
-            contactForm.style.display = 'none';
-            formSuccess.classList.add('show');
-            
-            // Reset form after 5 seconds
-            setTimeout(() => {
-                contactForm.reset();
-                contactForm.style.display = 'flex';
-                formSuccess.classList.remove('show');
-            }, 5000);
-        } else {
-            throw new Error('Failed to submit lead');
-        }
-    } catch (error) {
-        console.error('Form submission error:', error);
-        alert('There was an error submitting your message. Please try again or contact us directly.');
-    }
-});
-
 // Intersection Observer for fade-in animations
 const observerOptions = {
     root: null,
@@ -180,33 +114,3 @@ if (heroCard) {
     });
 }
 
-// Phone number formatting
-const phoneInput = document.getElementById('phone');
-if (phoneInput) {
-    phoneInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 10) value = value.slice(0, 10);
-        
-        if (value.length >= 6) {
-            value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
-        } else if (value.length >= 3) {
-            value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
-        }
-        
-        e.target.value = value;
-    });
-}
-
-// Add loading state to form submit button
-const submitBtn = contactForm.querySelector('button[type="submit"]');
-if (submitBtn) {
-    contactForm.addEventListener('submit', () => {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Sending...</span>';
-        
-        setTimeout(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span>Send Message</span>';
-        }, 2000);
-    });
-}
