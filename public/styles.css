@@ -1205,3 +1205,9 @@ p {
         width: 100%;
     }
 }
+
+/* Contrast correction: dark CTA requires bright, legible typography. */
+.cta-box, .cta-box h2, .cta-box p { color: #FFFFFF !important; }
+.cta-box p { color: #E8EDF5 !important; }
+.cta-box .btn-primary { color: #141006 !important; }
+.cta-box .btn-primary:hover { color: #141006 !important; }
