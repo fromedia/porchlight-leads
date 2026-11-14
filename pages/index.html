@@ -27,6 +27,8 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#process">Process</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="https://getporchlightleads.com/pricing/" target="_blank" rel="noopener noreferrer">Pricing</a></li>
+                <li><a href="https://getporchlightleads.com/loginuser" target="_blank" rel="noopener noreferrer">Client Login</a></li>
                 <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
             </ul>
         </div>
@@ -392,6 +394,19 @@
 
                               var wrapper = doc.querySelector('.fluentform_wrapper_4');
                               if (!wrapper) return;
+
+                              /* Keep the consent notice connected to the published
+                                 WordPress legal pages rather than placeholder # links. */
+                              wrapper.querySelectorAll('.ff_t_c a').forEach(function (link) {
+                                var label = (link.textContent || '').toLowerCase();
+                                if (label.indexOf('terms') !== -1) {
+                                  link.href = 'https://getporchlightleads.com/terms';
+                                } else if (label.indexOf('privacy') !== -1) {
+                                  link.href = 'https://getporchlightleads.com/privacy-policy/';
+                                }
+                                link.target = '_blank';
+                                link.rel = 'noopener noreferrer';
+                              });
 
                               /* Keep the WordPress form and its scripts, but hide unrelated
                                  WordPress navigation, footers, CTAs and page content. */
