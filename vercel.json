@@ -4,6 +4,10 @@
     {
       "source": "/pll-intake",
       "destination": "https://getporchlightleads.com/porch-light-leads-embedded-inquiry-form/"
+    },
+    {
+      "source": "/wp-admin/admin-ajax.php",
+      "destination": "https://getporchlightleads.com/wp-admin/admin-ajax.php"
     }
   ]
 }
