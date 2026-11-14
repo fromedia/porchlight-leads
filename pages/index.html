@@ -24,9 +24,9 @@
                 <span></span>
             </button>
             <ul class="nav-menu" id="navMenu">
+                <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#process">Process</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="https://getporchlightleads.com/pricing/" target="_blank" rel="noopener noreferrer">Pricing</a></li>
                 <li><a href="https://getporchlightleads.com/loginuser" target="_blank" rel="noopener noreferrer">Client Login</a></li>
                 <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
@@ -428,6 +428,25 @@
                                 link.target = '_blank';
                                 link.rel = 'noopener noreferrer';
                               });
+
+                              /* Keep the form's submit action consistent with PLL branding.
+                                 This modifies presentation only; WordPress handles submission. */
+                              if (!doc.getElementById('pll-embedded-form-brand-style')) {
+                                var brandStyle = doc.createElement('style');
+                                brandStyle.id = 'pll-embedded-form-brand-style';
+                                brandStyle.textContent =
+                                  '.fluentform_wrapper_4 .ff-btn-submit,' +
+                                  '.fluentform_wrapper_4 button[type="submit"],' +
+                                  '.fluentform_wrapper_4 input[type="submit"]' +
+                                  '{background:#FD9800!important;border-color:#FD9800!important;' +
+                                  'color:#141006!important;font-weight:700!important;' +
+                                  'border-radius:8px!important;min-height:44px!important;' +
+                                  'padding:10px 24px!important;cursor:pointer!important;}' +
+                                  '.fluentform_wrapper_4 .ff-btn-submit:hover,' +
+                                  '.fluentform_wrapper_4 button[type="submit"]:hover' +
+                                  '{background:#E98C00!important;border-color:#E98C00!important;}';
+                                doc.head.appendChild(brandStyle);
+                              }
 
                               /* Keep the WordPress form and its scripts, but hide unrelated
                                  WordPress navigation, footers, CTAs and page content. */
