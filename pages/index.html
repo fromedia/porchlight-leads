@@ -368,10 +368,32 @@
                         <iframe
                             src="/pll-intake"
                             title="Porch Light Leads Business Preview Request Form"
+                            id="pllLeadFormFrame"
                             loading="lazy"
                             style="width:100%;height:1200px;border:0;background:#fff"
                             referrerpolicy="strict-origin-when-cross-origin"
                         ></iframe>
+                        <script>
+                        (function () {
+                          var frame = document.getElementById('pllLeadFormFrame');
+                          if (!frame) return;
+                          frame.addEventListener('load', function () {
+                            try {
+                              var w = frame.contentWindow;
+                              var doc = frame.contentDocument;
+                              if (w.fluentFormVars) w.fluentFormVars.ajaxUrl = '/wp-admin/admin-ajax.php';
+                              Object.keys(w).filter(function(k){ return k.indexOf('fluent_form_ff_form_instance_4_') === 0; }).forEach(function(k){
+                                if (w[k] && typeof w[k] === 'object') w[k].ajaxUrl = '/wp-admin/admin-ajax.php';
+                              });
+                              var form = doc.querySelector('#fluentform_4');
+                              if (form) {
+                                var height = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight);
+                                if (height > 600 && height < 5000) frame.style.height = height + 'px';
+                              }
+                            } catch (e) { /* A direct form link remains available if a browser blocks iframe scripting. */ }
+                          });
+                        }());
+                        </script>
                         <p class="form-note">If the form does not display in your browser, <a href="https://getporchlightleads.com/porch-light-leads-embedded-inquiry-form/">open the secure request form directly</a>.</p>
                     </div>
                 </div>
