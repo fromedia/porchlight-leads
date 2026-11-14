@@ -884,70 +884,103 @@ p {
 
 /* Footer */
 .footer {
-    background: var(--secondary);
-    color: white;
-    padding: 60px 0 24px;
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 0 0 24px;
 }
-
+.footer-invite {
+    background: #FEF9E1;
+    border-top: 1px solid #F9F0C8;
+    padding: 58px 0;
+}
+.footer-invite-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+.footer-eyebrow {
+    display: block;
+    color: #69430C;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.footer-invite h2 {
+    color: #0F172A;
+    max-width: 650px;
+    margin: 0;
+}
+.footer-invite-button {
+    background: #FD9800;
+    color: #141006;
+    font-weight: 700;
+    border: 2px solid #FD9800;
+    white-space: nowrap;
+}
+.footer-invite-button:hover {
+    background: #E98C00;
+    border-color: #E98C00;
+    color: #141006;
+}
 .footer-content {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
+    grid-template-columns: minmax(240px, 1.65fr) repeat(3, minmax(140px, 1fr));
+    gap: 38px;
+    padding-top: 68px;
+    padding-bottom: 48px;
 }
-
 .footer-logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: white;
+    color: #FFFFFF;
     text-decoration: none;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
-
 .footer-brand p {
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 320px;
+    color: #D1D7E0;
+    max-width: 340px;
+    line-height: 1.8;
 }
-
 .footer-col h4 {
-    color: white;
-    margin-bottom: 16px;
+    color: #FFFFFF;
     font-size: 1rem;
+    margin-bottom: 20px;
 }
-
 .footer-col ul {
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
-
 .footer-col li {
-    margin-bottom: 10px;
+    color: #D1D7E0;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    font-size: 0.93rem;
 }
-
 .footer-col a {
-    color: rgba(255, 255, 255, 0.7);
+    color: #F7C66B;
     text-decoration: none;
-    transition: var(--transition);
+    transition: color var(--transition);
 }
-
-.footer-col a:hover {
-    color: var(--accent-light);
+.footer-col a:hover,
+.footer-col a:focus-visible {
+    color: #FFFFFF;
+    text-decoration: underline;
 }
-
 .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
 }
-
 .footer-bottom p {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.875rem;
+    color: #D1D7E0;
+    font-size: 0.9rem;
 }
-
 /* Responsive Design */
 @media (max-width: 992px) {
     .hero .container {
@@ -1110,4 +1143,65 @@ p {
   .footer-content { grid-template-columns: 1fr; text-align: left; gap: 30px; padding: 45px 0 35px; }
   .footer-brand p { max-width: none; }
   .footer-invite { padding: 44px 0; }
+}
+
+/* PLL WordPress gold-first brand alignment */
+:root {
+    --brand-gold: #FD9800;
+    --brand-gold-hover: #E98C00;
+}
+.btn-primary,
+.hero .btn-primary,
+.nav-menu .btn-primary {
+    color: #141006;
+    font-weight: 650;
+}
+.btn-primary:hover,
+.nav-menu .btn-primary:hover {
+    color: #141006;
+}
+.hero .highlight {
+    color: #B76700;
+}
+.cta-box {
+    background: linear-gradient(135deg, #141006 0%, #0F172A 100%);
+    border: 1px solid rgba(253,152,0,0.26);
+}
+.cta-box .btn-primary {
+    background: #FD9800;
+    color: #141006;
+}
+.cta-box .btn-primary:hover {
+    background: #E98C00;
+    color: #141006;
+}
+@media (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 768px) {
+    .footer-invite-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        text-align: left;
+        gap: 30px;
+        padding-top: 48px;
+        padding-bottom: 34px;
+    }
+    .footer-brand p {
+        max-width: 100%;
+    }
+}
+@media (max-width: 520px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    .footer-invite-button {
+        white-space: normal;
+        width: 100%;
+    }
 }
