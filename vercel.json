@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/pll-intake",
+      "destination": "https://getporchlightleads.com/porch-light-leads-embedded-inquiry-form/"
+    }
+  ]
+}
