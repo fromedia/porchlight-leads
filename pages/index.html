@@ -410,11 +410,6 @@
                                 parent.style.setProperty('padding', '0', 'important');
                                 current = parent;
                               }
-                              Array.prototype.forEach.call(doc.body.children, function (child) {
-                                if (child !== current && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
-                                  child.style.setProperty('display', 'none', 'important');
-                                }
-                              });
                               doc.documentElement.style.setProperty('margin', '0', 'important');
                               doc.documentElement.style.setProperty('padding', '0', 'important');
                               doc.body.style.setProperty('margin', '0', 'important');
