@@ -1211,3 +1211,41 @@ p {
 .cta-box p { color: #E8EDF5 !important; }
 .cta-box .btn-primary { color: #141006 !important; }
 .cta-box .btn-primary:hover { color: #141006 !important; }
+
+
+/* November 2026: keep context alongside the entire long intake form.
+   The advice panel remains visible as visitors scroll, instead of leaving
+   an empty white column beside the lower sections of the embedded form. */
+.contact {
+  background: linear-gradient(130deg, #fffdf7 0%, #fff8e9 56%, #fffdf7 100%);
+  padding: 72px 0 96px;
+}
+.contact-grid {
+  grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+.contact-info {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  background: #fff;
+  border: 1px solid #e9dfc7;
+  border-top: 5px solid #fd9800;
+  border-radius: 16px;
+  padding: clamp(25px, 3vw, 42px);
+  box-shadow: 0 12px 40px rgba(20,16,6,.06);
+}
+.contact-info > p { margin-bottom: 28px; }
+.contact-details { gap: 22px; }
+.contact-form-wrapper { min-width: 0; padding: clamp(20px, 3vw, 36px); }
+.contact-form { min-width: 0; }
+@media (max-width: 992px) {
+  .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: 760px; margin: 0 auto; }
+  .contact-info { position: static; top: auto; }
+  .contact { padding: 56px 0 75px; }
+}
+@media (max-width: 600px) {
+  .contact-info { padding: 22px; }
+  .contact-form-wrapper { padding: 18px; }
+}
