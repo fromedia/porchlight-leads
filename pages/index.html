@@ -395,6 +395,27 @@
                               var wrapper = doc.querySelector('.fluentform_wrapper_4');
                               if (!wrapper) return;
 
+                              /* Attribute inquiry submissions to their inbound campaigns
+                                 without cookies, a new plugin, or changes to form fields.
+                                 Keep visitor-provided notes intact. */
+                              var campaignFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+                              var query = new URLSearchParams(window.location.search);
+                              var attribution = campaignFields.map(function (key) {
+                                var value = (query.get(key) || '').trim().slice(0, 120);
+                                return value ? key + ': ' + value : '';
+                              }).filter(Boolean);
+                              var form = wrapper.querySelector('form');
+                              var notes = form && form.querySelector('textarea[name="description"]');
+                              if (form && notes && attribution.length) {
+                                form.addEventListener('submit', function () {
+                                  if (notes.dataset.pllCampaignAdded === '1') return;
+                                  var detail = '[Campaign attribution]\\n' + attribution.join('\\n');
+                                  notes.value = (notes.value.trim() ? notes.value.trim() + '\\n\\n' : '') + detail;
+                                  notes.dataset.pllCampaignAdded = '1';
+                                  notes.dispatchEvent(new Event('input', { bubbles: true }));
+                                }, true);
+                              }
+
                               /* Keep the consent notice connected to the published
                                  WordPress legal pages rather than placeholder # links. */
                               wrapper.querySelectorAll('.ff_t_c a').forEach(function (link) {
