@@ -406,6 +406,22 @@
                               }).filter(Boolean);
                               var form = wrapper.querySelector('form');
                               var notes = form && form.querySelector('textarea[name="description"]');
+                              /* Record only successful Fluent Forms submissions.
+                                 No visitor contact details are sent to analytics. */
+                              if (form && w.jQuery && form.dataset.pllConversionListener !== '1') {
+                                form.dataset.pllConversionListener = '1';
+                                w.jQuery(form).on('fluentform_submission_success', function () {
+                                  var eventData = {event: 'pll_lead_submission_success', form_id: '4', source: 'pll_marketing'};
+                                  campaignFields.forEach(function (key) {
+                                    var value = (query.get(key) || '').trim().slice(0, 120);
+                                    if (value) eventData[key] = value;
+                                  });
+                                  window.dataLayer = window.dataLayer || [];
+                                  window.dataLayer.push(eventData);
+                                  window.dispatchEvent(new CustomEvent('pll:lead-submission-success', {detail: eventData}));
+                                });
+                              }
+
                               if (form && notes && attribution.length) {
                                 form.addEventListener('submit', function () {
                                   if (notes.dataset.pllCampaignAdded === '1') return;
