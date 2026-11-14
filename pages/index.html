@@ -379,18 +379,64 @@
                           if (!frame) return;
                           frame.addEventListener('load', function () {
                             try {
-                              var w = frame.contentWindow;
-                              var doc = frame.contentDocument;
+                              var w = frame.contentWindow, doc = frame.contentDocument;
+                              if (!w || !doc) return;
                               if (w.fluentFormVars) w.fluentFormVars.ajaxUrl = '/wp-admin/admin-ajax.php';
-                              Object.keys(w).filter(function(k){ return k.indexOf('fluent_form_ff_form_instance_4_') === 0; }).forEach(function(k){
-                                if (w[k] && typeof w[k] === 'object') w[k].ajaxUrl = '/wp-admin/admin-ajax.php';
+                              Object.keys(w).filter(function (key) {
+                                return key.indexOf('fluent_form_ff_form_instance_4_') === 0;
+                              }).forEach(function (key) {
+                                if (w[key] && typeof w[key] === 'object') {
+                                  w[key].ajaxUrl = '/wp-admin/admin-ajax.php';
+                                }
                               });
-                              var form = doc.querySelector('#fluentform_4');
-                              if (form) {
-                                var height = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight);
-                                if (height > 600 && height < 5000) frame.style.height = height + 'px';
+
+                              var wrapper = doc.querySelector('.fluentform_wrapper_4');
+                              if (!wrapper) return;
+
+                              /* Keep the WordPress form and its scripts, but hide unrelated
+                                 WordPress navigation, footers, CTAs and page content. */
+                              var current = wrapper;
+                              while (current && current !== doc.body) {
+                                var parent = current.parentElement;
+                                if (!parent) break;
+                                Array.prototype.forEach.call(parent.children, function (sibling) {
+                                  if (sibling !== current && sibling.tagName !== 'SCRIPT' && sibling.tagName !== 'STYLE') {
+                                    sibling.style.setProperty('display', 'none', 'important');
+                                  }
+                                });
+                                parent.style.setProperty('width', '100%', 'important');
+                                parent.style.setProperty('max-width', 'none', 'important');
+                                parent.style.setProperty('margin', '0', 'important');
+                                parent.style.setProperty('padding', '0', 'important');
+                                current = parent;
                               }
-                            } catch (e) { /* A direct form link remains available if a browser blocks iframe scripting. */ }
+                              Array.prototype.forEach.call(doc.body.children, function (child) {
+                                if (child !== current && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
+                                  child.style.setProperty('display', 'none', 'important');
+                                }
+                              });
+                              doc.documentElement.style.setProperty('margin', '0', 'important');
+                              doc.documentElement.style.setProperty('padding', '0', 'important');
+                              doc.body.style.setProperty('margin', '0', 'important');
+                              doc.body.style.setProperty('padding', '0', 'important');
+                              doc.body.style.setProperty('min-height', '0', 'important');
+                              doc.body.style.setProperty('overflow', 'hidden', 'important');
+
+                              function fitHeight() {
+                                var rect = wrapper.getBoundingClientRect();
+                                var height = Math.max(wrapper.scrollHeight, rect.height);
+                                frame.style.height = Math.ceil(Math.max(200, height) + 30) + 'px';
+                              }
+                              fitHeight();
+                              if (w.ResizeObserver) {
+                                new w.ResizeObserver(fitHeight).observe(wrapper);
+                              }
+                              w.addEventListener('resize', fitHeight);
+                              w.setTimeout(fitHeight, 250);
+                              w.setTimeout(fitHeight, 1500);
+                            } catch (error) {
+                              /* Native WordPress form remains reachable via the fallback link. */
+                            }
                           });
                         }());
                         </script>
