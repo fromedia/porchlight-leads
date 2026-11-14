@@ -409,8 +409,8 @@
                               if (form && notes && attribution.length) {
                                 form.addEventListener('submit', function () {
                                   if (notes.dataset.pllCampaignAdded === '1') return;
-                                  var detail = '[Campaign attribution]\\n' + attribution.join('\\n');
-                                  notes.value = (notes.value.trim() ? notes.value.trim() + '\\n\\n' : '') + detail;
+                                  var detail = '[Campaign attribution]\n' + attribution.join('\n');
+                                  notes.value = (notes.value.trim() ? notes.value.trim() + '\n\n' : '') + detail;
                                   notes.dataset.pllCampaignAdded = '1';
                                   notes.dispatchEvent(new Event('input', { bubbles: true }));
                                 }, true);
