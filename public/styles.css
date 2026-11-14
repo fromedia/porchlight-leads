@@ -1,17 +1,17 @@
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --primary-light: #3b82f6;
-    --secondary: #0f172a;
-    --accent: #f59e0b;
-    --accent-light: #fbbf24;
-    --text: #1e293b;
-    --text-light: #64748b;
-    --text-muted: #94a3b8;
-    --bg: #ffffff;
-    --bg-light: #f8fafc;
-    --bg-dark: #f1f5f9;
-    --border: #e2e8f0;
+    --primary: #FD9800;
+    --primary-dark: #E98C00;
+    --primary-light: #FFB540;
+    --secondary: #0F172A;
+    --accent: #FD9800;
+    --accent-light: #F9F0C8;
+    --text: #454F5E;
+    --text-light: #596371;
+    --text-muted: #69717B;
+    --bg: #FFFFFF;
+    --bg-light: #FEF9E1;
+    --bg-dark: #F9F0C8;
+    --border: #E9DFC7;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -315,7 +315,7 @@ p {
 }
 
 .card-dots span:nth-child(2) {
-    background: #fbbf24;
+    background: var(--primary);
 }
 
 .card-dots span:nth-child(3) {
@@ -579,7 +579,7 @@ p {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.5rem;
     font-weight: 700;
-    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 8px rgba(253, 152, 0, 0.16);
 }
 
 .step-content {
@@ -839,7 +839,7 @@ p {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(253, 152, 0, 0.16);
 }
 
 .form-group textarea {
@@ -1079,4 +1079,35 @@ p {
     .type-tags {
         justify-content: center;
     }
+}
+/* WordPress Porch Light Leads design parity: footer and brand accents */
+.btn-primary { color: #141006; font-weight: 700; }
+.btn-primary:hover { color: #141006; }
+.cta-box { background: linear-gradient(135deg, #FD9800 0%, #E98C00 100%); color: #141006; }
+.cta-box h2, .cta-box p { color: #141006; }
+.cta-box .btn-primary { background: #0F172A; color: #FFFFFF; }
+.cta-box .btn-primary:hover { background: #141006; color: #FFFFFF; }
+.footer { background: #0F172A; padding: 0 0 28px; }
+.footer-invite { background: #FEF9E1; border-top: 3px solid #FD9800; border-bottom: 1px solid #E9DFC7; padding: 64px 0; }
+.footer-invite-inner { display: flex; gap: 32px; align-items: center; justify-content: space-between; }
+.footer-eyebrow { display: block; color: #6B5525; font-weight: 600; margin-bottom: 8px; }
+.footer-invite h2 { color: #0F172A; max-width: 690px; font-size: clamp(1.75rem,3vw,2.65rem); }
+.footer-invite-button { background: #FD9800; color: #141006; font-weight: 700; white-space: nowrap; }
+.footer-invite-button:hover { background: #E98C00; color: #141006; }
+.footer-content { display: grid; grid-template-columns: 1.55fr 1fr 1fr 1fr; gap: 34px; padding: 66px 0 48px; margin: 0; }
+.footer-col ul { list-style: none; padding: 0; }
+.footer-col li { margin-bottom: 13px; color: #DDE1E9; font-size: .94rem; }
+.footer-col h4 { color: #FD9800; font-weight: 700; margin-bottom: 22px; }
+.footer-col a { color: #F0F1F4; }
+.footer-col a:hover, .footer-col a:focus-visible { color: #FFB540; text-decoration: underline; }
+.footer-brand p { max-width: 360px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.18); padding-top: 25px; }
+.footer-bottom p { color: #D7DCE4; }
+@media (max-width: 1000px) { .footer-content { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 35px; } }
+@media (max-width: 700px) {
+  .footer-invite-inner { flex-direction: column; align-items: flex-start; }
+  .footer-invite-button { width: 100%; justify-content: center; }
+  .footer-content { grid-template-columns: 1fr; text-align: left; gap: 30px; padding: 45px 0 35px; }
+  .footer-brand p { max-width: none; }
+  .footer-invite { padding: 44px 0; }
 }
